@@ -1,15 +1,13 @@
-const browserEnv = require('browser-env');
 const express = require('express');
 const router = new express.Router();
 const DriverData = require('../models/driverModel');
-browserEnv(['navigator']);
 
 router.use(express.json()); //json converter method
 
 router.use(express.urlencoded()); //to get html data 
 
 router.use(express.static('public')); //static site route
-
+var ObjectId = require('mongodb').ObjectId;
 // ==================LOCATION=====================================
 
 router.post('/form', async (req, res) => {
@@ -20,8 +18,8 @@ router.post('/form', async (req, res) => {
             name: req.body.name,
             phoneNumber : req.body.phoneNumber,
             currentLocation : {
-                longitude : 21.1702,
-                latitude : 72.8311
+                longitude : 23.0225,
+                latitude : 72.5714
             }
 
         })
@@ -34,6 +32,13 @@ router.post('/form', async (req, res) => {
     }
     res.redirect('/form');
 })
-
+router.post('/track-order', async (req, res) => {
+    console.log('something');
+    console.log(req.body);       
+    const _id = req.body.orderId
+        const result = await DriverData.findById(_id);
+        console.log(result.name);
+        res.send()
+})
 
 module.exports = router;
