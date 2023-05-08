@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,9 +8,27 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 id="driverName">{{name}}</h1>
+        <h1 id="driverName"></h1>
         <h1 id="locationDetail">{{number}}</h1>
     </div>
-    <script src="../routes/driver.js"></script>
+    <script>
+      const resultFn = async () => {
+        result = await fetch("http://127.0.0.1:8000/track-order", {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "same-origin", // include, *same-origin, omit
+            headers: {
+              "Content-Type": "application/json",
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            }
+            });
+        const data = await result.json();
+        console.log(data)
+        //document.getElementById('driverName').innerHTML = data;
+        //document.getElementById('locationDetail').innerHTML = data;
+      }
+      resultFn();
+    </script>
 </body>
 </html>

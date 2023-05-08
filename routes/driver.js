@@ -9,7 +9,9 @@ router.use(express.urlencoded()); //to get html data
 router.use(express.static('public')); //static site route
 var ObjectId = require('mongodb').ObjectId;
 // ==================LOCATION=====================================
-
+var headersOpt = {  
+    "content-type": "application/json",
+};
 router.post('/form', async (req, res) => {
   
     console.log(req.body);
@@ -21,7 +23,6 @@ router.post('/form', async (req, res) => {
                 longitude : 23.0225,
                 latitude : 72.5714
             }
-
         })
         const result = await driverList.save()
 
@@ -37,8 +38,8 @@ router.post('/track-order', async (req, res) => {
     console.log(req.body);       
     const _id = req.body.orderId
         const result = await DriverData.findById(_id);
-        console.log(result.name);
-        res.send()
+        // console.log(result.name);
+        res.send(result)
 })
 
 module.exports = router;
