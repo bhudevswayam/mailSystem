@@ -33,13 +33,15 @@ router.post('/form', async (req, res) => {
     }
     res.redirect('/form');
 })
-router.post('/track-order', async (req, res) => {
+router.post('/track-order', async (req, res, next) => {
     console.log('something');
     console.log(req.body);       
     const _id = req.body.orderId
         const result = await DriverData.findById(_id);
+        console.log(result);
         // console.log(result.name);
-        res.send(result)
+        res.send(`<h1>Driver : ${result.name}</h1><br><h1>Phone : ${result.phoneNumber}</h1><br><h1>Address : ${result.currentLocation.latitude} , ${result.currentLocation.longitude}</h1><br`)
+        // res.redirect('/track')  
 })
 
 module.exports = router;
